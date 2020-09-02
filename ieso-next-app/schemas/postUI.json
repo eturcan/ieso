@@ -1,0 +1,61 @@
+{
+  "emotions": {
+    "angry": {
+      "ui:widget": "range"
+    },
+    "attentive": {
+      "ui:widget": "range"
+    },
+    "stressed": {
+      "ui:widget": "range"
+    },
+    "happy": {
+      "ui:widget": "range"
+    },
+    "lonely": {
+      "ui:widget": "range"
+    },
+    "calm": {
+      "ui:widget": "range"
+    },
+    "excited": {
+      "ui:widget": "range"
+    },
+    "anxious": {
+      "ui:widget": "range"
+    },
+    "annoyed": {
+      "ui:widget": "range"
+    },
+    "guilty": {
+      "ui:widget": "range"
+    }
+  },
+  "emotions_description": {
+    "ui:widget": "textarea"
+  },
+  "posting_regarding_event": {
+    "ui:widget": "radio"
+  },
+  "event_occurence": {
+    "ui:widget": "radio"
+  },
+  "event_description": {
+    "ui:widget": "textarea"
+  },
+  "public_private": {
+    "ui:widget": "radio"
+  },
+  "follow_up": {
+    "ui:widget": "radio"
+  },
+  "ui:order": [
+    "emotions",
+    "emotions_description",
+    "posting_regarding_event",
+    "event_occurence",
+    "event_description",
+    "public_private",
+    "follow_up"
+  ]
+}

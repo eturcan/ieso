@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  ieso-next-app:
+    container_name: ieso-next-app
+    build: ./ieso-next-app
+    restart: always
+    volumes:
+      - ./ieso-next-app:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+      - 9229:9229
+    links:
+      - mongo
+    command: npm run dev
+    environment:
+      - NEXTAUTH_URL=http://localhost:3000
+  mongo:
+    container_name: ieso-mongo
+    image: mongo
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 27017:27017
+  mongoex:
+    container_name: ieso-mongoex
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    links:
+      - mongo

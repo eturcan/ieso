@@ -1,0 +1,28 @@
+{
+  "name": "ieso",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "start:prod": "next build; next start"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@rjsf/core": "^2.3.0",
+    "@rjsf/material-ui": "^2.3.0",
+    "babel-plugin-styled-components": "1.11.0-0",
+    "bcrypt": "^5.0.0",
+    "mongodb": "^3.6.0",
+    "next": "9.5.1",
+    "next-auth": "^3.1.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "styled-components": "^5.1.1",
+    "typeface-abril-fatface": "0.0.72",
+    "typeface-spectral": "0.0.72",
+    "typeface-work-sans": "0.0.72"
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "Submit a Posting",
+  "description": "Share what is on your mind—other users and volunteer student social workers are waiting to help you process your emotions.",
+  "default": {},
+  "required": [
+      "emotions",
+      "emotions_description",
+      "posting_regarding_event",
+      "public_private",
+      "follow_up"
+  ],
+  "properties": {
+      "emotions": {
+          "$id": "#/properties/emotions",
+          "type": "object",
+          "title": "Emotions",
+          "description": "How much are you feeling each of the following emotions right now, from 1 (low) to 10 (high)?",
+          "required": [
+              "angry",
+              "attentive",
+              "stressed",
+              "happy",
+              "lonely",
+              "calm",
+              "excited",
+              "anxious",
+              "annoyed",
+              "guilty"
+          ],
+          "properties": {
+              "angry": {
+                  "$id": "#/properties/emotions/properties/angry",
+                  "type": "integer",
+                  "title": "angry",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+                  
+              },
+              "attentive": {
+                  "$id": "#/properties/emotions/properties/attentive",
+                  "type": "integer",
+                  "title": "attentive",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "stressed": {
+                  "$id": "#/properties/emotions/properties/stressed",
+                  "type": "integer",
+                  "title": "stressed",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "happy": {
+                  "$id": "#/properties/emotions/properties/happy",
+                  "type": "integer",
+                  "title": "happy",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "lonely": {
+                  "$id": "#/properties/emotions/properties/lonely",
+                  "type": "integer",
+                  "title": "lonely",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "calm": {
+                  "$id": "#/properties/emotions/properties/calm",
+                  "type": "integer",
+                  "title": "calm",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "excited": {
+                  "$id": "#/properties/emotions/properties/excited",
+                  "type": "integer",
+                  "title": "excited",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "anxious": {
+                  "$id": "#/properties/emotions/properties/anxious",
+                  "type": "integer",
+                  "title": "anxious",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "annoyed": {
+                  "$id": "#/properties/emotions/properties/annoyed",
+                  "type": "integer",
+                  "title": "annoyed",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              },
+              "guilty": {
+                  "$id": "#/properties/emotions/properties/guilty",
+                  "type": "integer",
+                  "title": "guilty",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "default": 5,
+                  "examples": [
+                      5
+                  ]
+              }
+          },
+          "additionalProperties": false
+      },
+      "emotions_description": {
+          "$id": "#/properties/emotions_description",
+          "type": "string",
+          "title": "How are you feeling?",
+          "default": "",
+          "minLength": 1,
+          "maxLength": 500,
+          "examples": [
+              "I have been feeling sad recently..."
+          ]
+      },
+      "posting_regarding_event": {
+          "$id": "#/properties/posting_regarding_event",
+          "type": "boolean",
+          "title": "Are you posting regarding an event?",
+          "default": true,
+          "examples": [
+              true
+          ]
+      },
+      "public_private": {
+          "$id": "#/properties/public_private",
+          "type": "string",
+          "title": "Would you like this post to be public?",
+          "description": "In both cases, you may receive replies from student social workers, but if your post is public, you may additionally receive replies from other users.",
+          "default": "",
+          "enum": ["public", "private"],
+          "examples": [
+              "public"
+          ]
+      },
+      "follow_up": {
+          "$id": "#/properties/follow_up",
+          "type": "boolean",
+          "title": "Can we follow-up with you?",
+          "description": "If you agree to a follow-up, a volunteer student social worker may send you a notification through the site to see how you are doing within two weeks time.",
+          "default": true,
+          "examples": [
+              true
+          ]
+      }
+  },
+  "dependencies": {
+    "posting_regarding_event": {
+      "oneOf": [
+        {
+          "properties": {
+            "emotions":{},
+            "emotions_description":{},
+            "public_private":{},
+            "follow_up":{},
+            "posting_regarding_event": {
+              "enum": [false]
+            }
+          },
+          "required": [
+            "posting_regarding_event"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "emotions":{},
+            "emotions_description":{},
+            "public_private":{},
+            "follow_up":{},
+            "posting_regarding_event": {
+              "enum": [true]
+            },
+            "event_occurence": {
+              "$id": "#/properties/event_occurence",
+              "type": "string",
+              "title": "When did this event occur?",
+              "default": "",
+              "enum": ["within the last hour", "within the last day", "within the last week"],
+              "examples": [
+                  "within the last day"
+              ]
+            },
+            "event_description": {
+              "$id": "#/properties/event_description",
+              "type": "string",
+              "title": "How would you describe what happened?",
+              "default": "",
+              "minLength": 1,
+              "maxLength": 500,
+              "examples": [
+                  "Earlier today I..."
+              ]
+            }
+          },
+          "required": [
+            "posting_regarding_event",
+            "event_occurence",
+            "event_description"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
