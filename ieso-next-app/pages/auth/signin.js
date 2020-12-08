@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router'
 import { csrfToken } from 'next-auth/client'
 import styled from 'styled-components'
 import { TextField, Button } from '@material-ui/core'
+import FAB from '../../components/FAB'
 
 let Container = styled.div`
   height: 100vh;
@@ -15,6 +17,7 @@ let Container = styled.div`
 `
 
 function SignIn({ csrfTokenProp, query }) {
+  const router = useRouter()
   return (
     <Container>
       <form method='post' action='/api/auth/callback/credentials'>
@@ -36,6 +39,11 @@ function SignIn({ csrfTokenProp, query }) {
         />
         <Button variant="contained" size="small" color="primary" type='submit'>Sign In</Button>
       </form>
+      <FAB
+        icon="arrow-left"
+        text="Back"
+        onClick={() => router.back()}
+      />
     </Container>
   )
 }

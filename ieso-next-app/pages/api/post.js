@@ -19,7 +19,7 @@ export default async (req, res) => {
       await client.connect()
       const database = client.db("posts")
       const collection = database.collection("posts")
-      await collection.insertOne({username:session.user.name, timestamp: Date.now(), ...req.body.formData})
+      await collection.insertOne({username:session.user.name, timestamp: Date.now(), ...req.body.formData, reviewed: false})
       res.status(201)
     }
   } else {

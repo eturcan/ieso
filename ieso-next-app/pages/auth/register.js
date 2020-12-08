@@ -1,6 +1,9 @@
+import { useRouter } from 'next/router'
 import { csrfToken } from 'next-auth/client'
 import styled from 'styled-components'
 import { TextField, Button } from '@material-ui/core'
+import FAB from '../../components/FAB'
+import Link from 'next/link'
 
 let Container = styled.div`
   height: 100vh;
@@ -14,10 +17,27 @@ let Container = styled.div`
   }
 `
 
+let Disclaimer = styled.div`
+  max-width: 30rem;
+
+  div {
+    margin-bottom: 1rem;
+  }
+`
+
 function Register({ csrfTokenProp, query }) {
+  const router = useRouter()
   return (
     <Container>
       <form method='post' action='/api/auth/callback/credentials'>
+        <Disclaimer>
+          <div>Welcome to ieso.</div>
+          <div>When creating an account, please refrain from including any identifiable information
+          in order to help preserve your anonymity. In the case that your username contains any personally
+          identifiable information, your account and any associated content will be permanently deleted.</div>
+          <div>For more information regarding ieso, please refer to the <Link href="/information">information sheet</Link>.</div>
+          <div>By creating an account, you confirm that you are over 18 years of age.</div>
+        </Disclaimer>
         <input name='csrfToken' type='hidden' defaultValue={csrfTokenProp}/>
         <input name='register' type='hidden' defaultValue="true"/>
         <TextField
@@ -36,6 +56,11 @@ function Register({ csrfTokenProp, query }) {
         />
         <Button variant="contained" size="small" color="primary" type='submit'>Register</Button>
       </form>
+      <FAB
+        icon="arrow-left"
+        text="Back"
+        onClick={() => router.back()}
+      />
     </Container>
   )
 }

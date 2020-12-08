@@ -1,8 +1,9 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import Sidebar from '../components/Sidebar'
 import Content from '../components/Content'
-import Post from '../components/Post'
-import PostButton from '../components/PostButton'
+import FAB from '../components/FAB'
+import PostSummary from '../components/PostSummary'
 
 const getPosts = async (req, page) => {
   return await fetch((req ? process.env.NEXTAUTH_URL : "") + '/api/getPosts', {
@@ -12,17 +13,22 @@ const getPosts = async (req, page) => {
   })
 }
 
-function Home({posts}) {
+function Home({posts, moderator}) {
   return (
     <div>
       <Head>
         <title>ieso</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Sidebar/>
+      <Sidebar moderator={moderator}/>
+      <Link href='/post'>
+        <FAB
+          icon="pen"
+          text="Post"
+        />
+      </Link>
       <Content>
-        <PostButton/>
-        {posts.map(post => <Post post={post}/>)}
+        {posts.map(post => <PostSummary post={post}/>)}
       </Content>
     </div>
   )

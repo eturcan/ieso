@@ -1,6 +1,14 @@
 # ieso
 
-A platform for sharing emotions, experiences, and finding help.
+ieso is a platform where users can share their emotions and experiences through posts, and receive help in processing them.
+          
+Posts not only help users come to terms with their difficult life experiences but also help social workers identify how to best assist individuals in processing their emotions. In addition, content contributed to the platform helps fuel Natural Language Processing research on identifying states of distress.
+          
+Posting is done pseudonymously in order to protect users' identities. When creating a post, users are prompted to fill out a form in order to collect first-hand information regarding the users' emotional state similar to an Ecological Momentary Assessment. This ultimately allows social workers and NLP researchers to understand participants' qualitative descriptions of their emotions and experiences more holistically.
+
+When users make posts, they are vetted by volunteer student social workers before being displayed either publically or privately. Posts are always able to receive replies from student social workers, but public posts are also visible to and open to interaction from other users of the site.
+
+Users are also given the option to receive a follow-up from a student social worker. In this case, they will receive a notification through the site that a student social worker is reaching out to them for further contact. At this point, users will be given the option of discussing with the student social worker over a voice or video call.
 
 ## Getting Started
 

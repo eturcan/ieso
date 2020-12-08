@@ -3,6 +3,9 @@
     "angry": {
       "ui:widget": "range"
     },
+    "sad": {
+      "ui:widget": "range"
+    },
     "attentive": {
       "ui:widget": "range"
     },
@@ -27,6 +30,12 @@
     "annoyed": {
       "ui:widget": "range"
     },
+    "hopeful": {
+      "ui:widget": "range"
+    },
+    "despaired": {
+      "ui:widget": "range"
+    },
     "guilty": {
       "ui:widget": "range"
     }
@@ -46,7 +55,7 @@
   "public_private": {
     "ui:widget": "radio"
   },
-  "follow_up": {
+  "topic": {
     "ui:widget": "radio"
   },
   "ui:order": [
@@ -56,6 +65,6 @@
     "event_occurence",
     "event_description",
     "public_private",
-    "follow_up"
+    "topic"
   ]
 }

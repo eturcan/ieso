@@ -12,16 +12,13 @@ const submit = async post => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(post)
   })
-  console.log(result)
 }
 
 const Container = styled.div`
   span.MuiTypography-root {
-    text-transform: lowercase;
   }
 
   .MuiDivider-root {
-    display: none;
   }
 `
 

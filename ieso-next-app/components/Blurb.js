@@ -7,10 +7,7 @@ let BlurbContainer = styled.div`
 `
 
 const Blurb = () => <BlurbContainer>
-  A platform for sharing stress, anxiety,
-  depression, and for finding help. 
-  Receive online guidance from social workers 
-  and contribute to Columbia research on distress.
+  A platform for sharing grief and emotions, and for finding help. Discuss with other users, and contribute to Columbia research on distress.
 </BlurbContainer>
 
 export default Blurb

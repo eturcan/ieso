@@ -7,13 +7,7 @@ export default async (req, res) => {
   await client.connect()
   const database = client.db("posts")
   const collection = database.collection("posts")
-  let posts = await collection.find().sort({timestamp: -1}).limit(10).skip(page * 10).toArray()
-  posts = posts.map(post => {
-    if (post.public_private === "private") {
-      delete post.username
-    }
-    return post
-  })
+  let posts = await collection.find({reviewed: true, public_private: "public"}).sort({timestamp: -1}).limit(10).skip(page * 10).toArray()
   req.statusCode = 200
   res.json({posts})
 }
