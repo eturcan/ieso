@@ -51,6 +51,13 @@ let Align = styled.div`
   }
 `
 
+let Badges = styled.div`
+  div {
+    display: inline;
+    padding-right: 1rem;
+  }
+`
+
 const Attribute = ({emotion, rank}) => <StyledAttribute>
   {emotion}
   <Badge>
@@ -58,8 +65,10 @@ const Attribute = ({emotion, rank}) => <StyledAttribute>
   </Badge>
 </StyledAttribute>
 
-const PostSummary = ({post: {emotions_description, event_description, emotions, replies, _id}}) => <Link href={`/posts/${_id}`}>
+const PostSummary = ({post: {emotions_description, event_description, emotions, replies, public_private, reviewed, _id}}) => <Link href={`/posts/${_id}`}>
   <Container>
+  <Badges>{public_private === "private" && <Badge>Private</Badge>}
+  {reviewed === false && <Badge>Unreviewed</Badge>}</Badges>
     <div>
       {emotions_description}
     </div>
@@ -75,6 +84,7 @@ const PostSummary = ({post: {emotions_description, event_description, emotions, 
           .map(([emotion, rank]) => <Attribute
             emotion={emotion}
             rank={rank}
+            key={emotion}
           />
         )
       }

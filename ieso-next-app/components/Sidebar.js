@@ -11,6 +11,7 @@ let Container = styled.div`
   padding: 10vmin;
   position: fixed;
   box-sizing: border-box;
+  font-family: 'Work Sans';
 
   @media only screen and (max-width: 1000px) {
     position: relative;
@@ -18,6 +19,11 @@ let Container = styled.div`
     height: unset;
     padding: 1rem;
   }
+`
+
+let Notification = styled.div`
+  font-family: 'Work Sans';
+  font-size: 0.8rem;
 `
 
 let MenuContainer = styled.div`
@@ -28,22 +34,63 @@ const isModerator = async (username) => {
   return await fetch('/api/isModerator', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({username})
+    body: JSON.stringify({ username })
+  })
+}
+
+const getNotifications = async () => {
+  let data = await fetch('/api/getNotifications', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  if (data.status === 200) {
+    let { notifications } = await data.json()
+    return notifications
+  }
+  return []
+}
+
+const dismissNotification = async id => {
+  return await fetch('/api/dismissNotification', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
   })
 }
 
 export default function Sidebar() {
-  const [ moderator, setModerator ] = useState(false)
+  const [moderator, setModerator] = useState(false)
+  const [notifications, setNotifications] = useState([])
   useEffect(() => {
-    let checkModerator = async () => setModerator((await isModerator()).status === 200 ? true : false)
-    checkModerator()
-  })
+    let update = async () => {
+      setModerator((await isModerator()).status === 200 ? true : false)
+      setNotifications(await getNotifications())
+    }
+    update()
+  }, [])
 
   return <Container>
-    <HomeButton/>
+    <HomeButton />
     <MenuContainer>
-      <Account/>
+      <Account />
     </MenuContainer>
+    <div>
+      {
+        notifications.map(({ _id, id, type, approved }) => {
+          if (type === "post")
+            return <Notification><div onClick={() => {
+              dismissNotification(_id)
+              window.location.reload()
+            }
+            }><div className={`fas fa-times`}/></div>Your post, {id}, has been {approved ? "approved" : "rejected"}</Notification>
+          return <Notification><div onCzlick={() => {
+            dismissNotification(_id)
+            window.location.reload()
+          }
+          }><div className={`fas fa-times`}/></div>Your reply to {id}, has been {approved ? "approved" : "rejected"}</Notification>
+        })
+      }
+    </div>
     <MenuContainer>
       <MenuItem href="/about">
         about
@@ -51,11 +98,14 @@ export default function Sidebar() {
       <MenuItem href="/rules">
         site rules
       </MenuItem>
+      <MenuItem href="/privacy">
+        privacy
+      </MenuItem>
       <MenuItem href="/terms">
         terms of service
       </MenuItem>
-      <MenuItem href="/privacy">
-        privacy
+      <MenuItem href="/resources">
+        mental health resources
       </MenuItem>
       {
         moderator && <MenuItem href="/review">
@@ -63,6 +113,6 @@ export default function Sidebar() {
         </MenuItem>
       }
     </MenuContainer>
-    <Blurb/>
+    <Blurb />
   </Container>
 }

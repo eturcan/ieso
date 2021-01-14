@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/client'
 const uri = "mongodb://mongo:27017";
 const client = new MongoClient(uri);
 
-export default async (req, res) => {
+export default async function getReply(req, res) {
   const session = await getSession({ req })
   if (!session) {
     res.status(401)

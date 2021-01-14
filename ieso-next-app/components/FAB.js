@@ -21,7 +21,7 @@ let Solar = styled.div`
     filter: brightness(105%);
   }
 
-  i {
+  svg {
     margin-right: 1rem;
   }
 
@@ -33,7 +33,9 @@ let Solar = styled.div`
 
 function FAB(props, ref) {
   let {icon, text, onClick} = props
-  return <Solar onClick={onClick}><i className={`fas fa-${icon}`}/>{text}</Solar>
+  return <Solar onClick={onClick}><div className={`fas fa-${icon}`}/>{text}</Solar>
 }
 
-export default React.forwardRef(FAB)
+const RefFAB = React.forwardRef(FAB)
+
+export default RefFAB

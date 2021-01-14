@@ -14,11 +14,11 @@ const getPosts = async () => {
   })
 }
 
-const reviewPost = async (_id, type, approve) => {
+const reviewPost = async (_id, type, approve, username) => {
   return await fetch('/api/review', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({_id, type, approve})
+    body: JSON.stringify({_id, type, approve, username})
   })
 }
 
@@ -51,7 +51,7 @@ function Review() {
         {posts && posts.map(post => <div>
           <PostSummary post={post}/>
           <div onClick={() => {
-            reviewPost(post._id, "post", true)
+            reviewPost(post._id, "post", true, post.username)
             window.location.reload()
           }}>approve</div>
           <div onClick={() => {

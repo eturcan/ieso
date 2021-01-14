@@ -9,12 +9,15 @@ const client = new MongoClient(uri);
 const ajv = new Ajv()
 const validate = ajv.compile(post)
 
-export default async (req, res) => {
+export default async function getPost(req, res) {
   const session = await getSession({ req })
   if (session) {
     // Signed in
     let valid = validate(req.body.formData)
-    if (!valid) res.status(422)
+    if (!valid) {
+      console.log(validate.errors)
+      res.status(422)
+    }
     else {
       await client.connect()
       const database = client.db("posts")

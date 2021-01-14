@@ -15,10 +15,20 @@ const submit = async post => {
 }
 
 const Container = styled.div`
+
+  .MuiTypography-root, .MuiFormLabel-root {
+    font-family: 'Work Sans';
+    font-weight: 300;
+  }
+
   span.MuiTypography-root {
   }
 
   .MuiDivider-root {
+  }
+
+  .MuiGrid-root:empty {
+    display: none;
   }
 `
 

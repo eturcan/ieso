@@ -1,5 +1,6 @@
 {
   "emotions": {
+    "ui:title": "Emotion Rankings",
     "angry": {
       "ui:widget": "range"
     },
@@ -56,15 +57,19 @@
     "ui:widget": "radio"
   },
   "topic": {
-    "ui:widget": "radio"
+    "ui:widget": "checkboxes"
+  },
+  "topic_other": {
+    "ui:widget": "textarea"
   },
   "ui:order": [
-    "emotions",
     "emotions_description",
+    "emotions",
     "posting_regarding_event",
-    "event_occurence",
     "event_description",
+    "event_occurence",
     "public_private",
-    "topic"
+    "topic",
+    "topic_other"
   ]
 }

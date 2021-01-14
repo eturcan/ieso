@@ -3,14 +3,13 @@
     "$id": "http://example.com/example.json",
     "type": "object",
     "title": "Submit a Posting",
-    "description": "Share what is on your mind with other users and volunteer social workers.",
+    "description": "In your posting, you will be asked to share a self evaluation of your emotions. First, you will be asked to describe your emotions, and then you will be asked to evaluate them by ranking a set of chosen emotions from 1 to 10. After describing your emotions, you will be asked to describe any potential events or topics relating to your emotions. Please recall that you are free to make postings at any time as part of this study.",
     "default": {},
     "required": [
         "emotions",
         "emotions_description",
         "posting_regarding_event",
-        "public_private",
-        "topic"
+        "public_private"
     ],
     "properties": {
         "emotions": {
@@ -190,15 +189,26 @@
         },
         "topic": {
             "$id": "#/properties/topic",
+            "type": "array",
+            "title": "Is this related to COVID-19 or issues relevant to Black Lives Matter?",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "COVID-19",
+                    "Black Lives Matter"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "topic_other": {
+            "$id": "#/properties/topic_other",
             "type": "string",
-            "title": "Is this related to COVID-19 or issues relevant to BLM?",
-            "default": " ",
-            "enum": [
-                "COVID-19",
-                "BLM"
-            ],
+            "title": "Is this related to another topic?",
+            "default": "",
+            "minLength": 0,
+            "maxLength": 100,
             "examples": [
-                "COVID-19"
+                "This is related to..."
             ]
         },
         "public_private": {
@@ -218,6 +228,16 @@
     },
     "dependencies": {
         "posting_regarding_event": {
+            "properties": {
+                "emotions": {},
+                "emotions_description": {},
+                "public_private": {},
+                "topic": {},
+                "topic_other": {},
+                "posting_regarding_event": {},
+                "event_occurence": {},
+                "event_description": {}
+            },
             "oneOf": [
                 {
                     "properties": {
@@ -225,6 +245,7 @@
                         "emotions_description": {},
                         "public_private": {},
                         "topic": {},
+                        "topic_other": {},
                         "posting_regarding_event": {
                             "enum": [
                                 false
@@ -233,8 +254,7 @@
                     },
                     "required": [
                         "posting_regarding_event"
-                    ],
-                    "additionalProperties": false
+                    ]
                 },
                 {
                     "properties": {
@@ -242,6 +262,7 @@
                         "emotions_description": {},
                         "public_private": {},
                         "topic": {},
+                        "topic_other": {},
                         "posting_regarding_event": {
                             "enum": [
                                 true
@@ -278,10 +299,10 @@
                         "posting_regarding_event",
                         "event_occurence",
                         "event_description"
-                    ],
-                    "additionalProperties": false
+                    ]
                 }
-            ]
+            ],
+            "additionalProperties": false
         }
     }
 }

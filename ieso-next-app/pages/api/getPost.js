@@ -2,7 +2,7 @@ import { MongoClient, ObjectID } from 'mongodb'
 const uri = "mongodb://mongo:27017";
 const client = new MongoClient(uri);
 
-export default async (req, res) => {
+export default async function getPost(req, res) {
   const { pid } = req.body
   await client.connect()
   const postsDb = client.db("posts")

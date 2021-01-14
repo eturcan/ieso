@@ -1,26 +1,35 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useState, useEffect } from "react"
 import Sidebar from '../components/Sidebar'
 import Content from '../components/Content'
 import FAB from '../components/FAB'
 import PostSummary from '../components/PostSummary'
 
 const getPosts = async (req, page) => {
-  return await fetch((req ? process.env.NEXTAUTH_URL : "") + '/api/getPosts', {
+  const res = await fetch((req ? process.env.NEXTAUTH_URL : "") + '/api/getPosts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({page})
   })
+  const {posts} = await res.json()
+  return posts
 }
 
-function Home({posts, moderator}) {
+function Home() {
+  const [ posts, setPosts ] = useState([])
+  useEffect(() => {
+    let fetchPosts = async () => setPosts(await getPosts())
+    fetchPosts()
+  }, [])
+
   return (
     <div>
       <Head>
         <title>ieso</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Sidebar moderator={moderator}/>
+      <Sidebar/>
       <Link href='/post'>
         <FAB
           icon="pen"
@@ -28,16 +37,10 @@ function Home({posts, moderator}) {
         />
       </Link>
       <Content>
-        {posts.map(post => <PostSummary post={post}/>)}
+        {posts.map((post, i) => <PostSummary post={post} key={i}/>)}
       </Content>
     </div>
   )
-}
-
-Home.getInitialProps = async (ctx) => {
-  const res = await getPosts(ctx.req, 0)
-  const json = await res.json()
-  return json
 }
 
 export default Home
