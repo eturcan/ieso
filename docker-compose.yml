@@ -13,22 +13,30 @@ services:
       - 9229:9229
     links:
       - mongo
-    command: npm run dev
+    command: nodemon --exec npm run start:prod
     environment:
       - NEXTAUTH_URL=http://localhost:3000
+      - MONGO_USER=${IESO}
+      - MONGO_PASSWORD=${IESOPASSWORD}
   mongo:
     container_name: ieso-mongo
     image: mongo
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${IESO}
+      MONGO_INITDB_ROOT_PASSWORD: ${IESOPASSWORD}
     volumes:
       - ./data:/data/db
     ports:
       - 27017:27017
-  mongoex:
-    container_name: ieso-mongoex
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    links:
-      - mongo
+  # mongoex:
+  #   container_name: ieso-mongoex
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: ${IESO}
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: ${IESOPASSWORD}
+  #   links:
+  #     - mongo

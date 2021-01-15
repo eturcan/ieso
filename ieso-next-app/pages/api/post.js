@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/client'
 import post from '../../schemas/post'
 import { MongoClient } from 'mongodb'
 
-const uri = "mongodb://mongo:27017";
+const uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@mongo:27017`;
 const client = new MongoClient(uri);
 
 const ajv = new Ajv()

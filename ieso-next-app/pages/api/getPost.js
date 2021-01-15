@@ -1,5 +1,5 @@
 import { MongoClient, ObjectID } from 'mongodb'
-const uri = "mongodb://mongo:27017";
+const uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@mongo:27017`;
 const client = new MongoClient(uri);
 
 export default async function getPost(req, res) {

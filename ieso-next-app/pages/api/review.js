@@ -1,6 +1,6 @@
 import { MongoClient, ObjectID } from 'mongodb'
 import { getSession } from 'next-auth/client'
-const uri = "mongodb://mongo:27017";
+const uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@mongo:27017`;
 const client = new MongoClient(uri);
 
 export default async function review(req, res) {

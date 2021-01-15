@@ -3,7 +3,7 @@ import Providers from 'next-auth/providers'
 import bcrypt from 'bcrypt'
 import { MongoClient } from 'mongodb'
 
-const uri = "mongodb://mongo:27017";
+const uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@mongo:27017`;
 const client = new MongoClient(uri);
 const SALT_ROUNDS = 12
 

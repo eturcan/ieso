@@ -27,42 +27,40 @@ let Disclaimer = styled.div`
 
 function Register({ csrfTokenProp, query }) {
   const router = useRouter()
-  return (
-    <Container>
-      <form method='post' action='/api/auth/callback/credentials'>
-        <Disclaimer>
-          <div>Welcome to ieso.</div>
-          <div>When creating an account, please refrain from including any identifiable information
-          in order to help preserve your anonymity. In the case that your username contains any personally
-          identifiable information, your account and any associated content will be permanently deleted.</div>
-          <div>For more information regarding ieso, please refer to the <Link href="/information">information sheet</Link>.</div>
-          <div>By creating an account, you confirm that you are over 18 years of age.</div>
-        </Disclaimer>
-        <input name='csrfToken' type='hidden' defaultValue={csrfTokenProp}/>
-        <input name='register' type='hidden' defaultValue="true"/>
-        <TextField
-          id='username'
-          label='Username'
-          name='username'
-          type='text'
-          fullWidth
-        />
-        <TextField
-          id='password'
-          label='Password'
-          name='password'
-          type='password'
-          fullWidth
-        />
-        <Button variant="contained" size="small" color="primary" type='submit'>Register</Button>
-      </form>
-      <FAB
-        icon="arrow-left"
-        text="Back"
-        onClick={() => router.back()}
+  return <Container>
+    <form method='post' action='/api/auth/callback/credentials'>
+      <Disclaimer>
+        <div>Welcome to ieso.</div>
+        <div>When creating an account, please refrain from including any identifiable information
+        in order to help preserve your anonymity. In the case that your username contains any personally
+        identifiable information, your account and any associated content will be permanently deleted.</div>
+        <div>For more information regarding ieso, please refer to the <Link href="/information">information sheet</Link>.</div>
+        <div>By creating an account, you confirm that you are over 18 years of age.</div>
+      </Disclaimer>
+      <input name='csrfToken' type='hidden' defaultValue={csrfTokenProp}/>
+      <input name='register' type='hidden' defaultValue="true"/>
+      <TextField
+        id='username'
+        label='Username'
+        name='username'
+        type='text'
+        fullWidth
       />
-    </Container>
-  )
+      <TextField
+        id='password'
+        label='Password'
+        name='password'
+        type='password'
+        fullWidth
+      />
+      <Button variant="contained" size="small" color="primary" type='submit'>Register</Button>
+    </form>
+    <FAB
+      icon="arrow-left"
+      text="Back"
+      onClick={() => router.back()}
+    />
+  </Container>
 }
 
 Register.getInitialProps = async (context) => {

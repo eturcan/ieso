@@ -1,4 +1,5 @@
 import React from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from "styled-components"
 
 let Solar = styled.div`
@@ -33,7 +34,7 @@ let Solar = styled.div`
 
 function FAB(props, ref) {
   let {icon, text, onClick} = props
-  return <Solar onClick={onClick}><div className={`fas fa-${icon}`}/>{text}</Solar>
+  return <Solar onClick={onClick}><FontAwesomeIcon icon={['fas', icon]} />{text}</Solar>
 }
 
 const RefFAB = React.forwardRef(FAB)
