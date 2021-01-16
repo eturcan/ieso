@@ -27,6 +27,7 @@ const register = async ({username, password}) => {
   await client.connect()
   const database = client.db("accounts")
   const collection = database.collection("users")
+  await collection.ensureIndex("username", {unique: true})
 
   let hash = await bcrypt.hash(password, SALT_ROUNDS)
 
