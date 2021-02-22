@@ -39,6 +39,15 @@
     },
     "guilty": {
       "ui:widget": "range"
+    },
+    "afraid": {
+      "ui:widget": "range"
+    },
+    "disgusted": {
+      "ui:widget": "range"
+    },
+    "surprised": {
+      "ui:widget": "range"
     }
   },
   "emotions_description": {

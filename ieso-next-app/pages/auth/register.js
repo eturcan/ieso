@@ -25,6 +25,11 @@ let Disclaimer = styled.div`
   }
 `
 
+let Error = styled.div`
+  max-width: 30rem;
+  font-weight: 600;
+`
+
 function Register({ csrfTokenProp, query }) {
   const router = useRouter()
   return <Container>
@@ -37,6 +42,11 @@ function Register({ csrfTokenProp, query }) {
         <div>For more information regarding ieso, please refer to the <Link href="/information">information sheet</Link>.</div>
         <div>By creating an account, you confirm that you are over 18 years of age.</div>
       </Disclaimer>
+      {
+        query.error === "CredentialsSignin" && <Error>
+          <div>Those credentials are already associated with a user</div>
+        </Error>
+      }
       <input name='csrfToken' type='hidden' defaultValue={csrfTokenProp}/>
       <input name='register' type='hidden' defaultValue="true"/>
       <TextField

@@ -92,6 +92,9 @@ export default function Sidebar() {
       }
     </div>
     <MenuContainer>
+      <MenuItem href="/messages">
+        messages
+      </MenuItem>
       <MenuItem href="/about">
         about
       </MenuItem>

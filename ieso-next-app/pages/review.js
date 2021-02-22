@@ -14,22 +14,44 @@ const getPosts = async () => {
   })
 }
 
-const reviewPost = async (_id, type, approve, username) => {
+const reviewPost = async (_id, type, approve, username, message) => {
   return await fetch('/api/review', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({_id, type, approve, username})
+    body: JSON.stringify({_id, type, approve, username, message})
   })
+}
+
+function ReviewComponent(props) {
+  let [message, setMessage] = useState("")
+
+  let approve = async () => {
+    await props.reviewPost(props._id, props.type, true, props.username, [message])
+    props.refresh()
+  }
+  let reject = async () => {
+    await props.reviewPost(props._id, props.type, false, props.username, [message])
+    props.refresh()
+  }
+  let changeMessage = e => setMessage(e.target.value)
+
+  return <>
+    {props.children}
+    <textarea onChange={changeMessage}></textarea>
+    <div onClick={approve}>approve</div>
+    <div onClick={reject}>reject</div>
+  </>
 }
 
 function Review() {
   let [{posts, replies}, setData] = useState({posts:[], replies: []})
+  
+  let getUnreviewed = async () => {
+    let posts = await getPosts()
+    let data = await posts.json()
+    setData(data)
+  }
   useEffect(() => {
-    let getUnreviewed = async () => {
-      let posts = await getPosts()
-      let data = await posts.json()
-      setData(data)
-    }
     getUnreviewed()
   }, [])
 
@@ -40,36 +62,28 @@ function Review() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Sidebar/>
-      <Link href='/post'>
-        <FAB
-          icon="pen"
-          text="Post"
-        />
-      </Link>
       <Content>
         <h1>Posts</h1>
-        {posts && posts.map(post => <div>
+        {posts && posts.map(post => <ReviewComponent
+          _id={post._id}
+          type={"post"}
+          username={post.username}
+          reviewPost={reviewPost}
+          refresh={getUnreviewed}
+        >
           <PostSummary post={post}/>
-          <div onClick={() => {
-            reviewPost(post._id, "post", true, post.username)
-            window.location.reload()
-          }}>approve</div>
-          <div onClick={() => {
-            reviewPost(post._id, "post", false)
-            window.location.reload()
-          }}>reject</div>
-        </div>)}
+        </ReviewComponent>)}
         <h1>Replies</h1>
         {replies && replies.map(({post,...reply}) => <div>
           <PostSummary post={post[0]}/>
           <Reply text={reply.text}></Reply>
           <div onClick={() => {
             reviewPost(reply._id, "reply", true)
-            window.location.reload()
+            getUnreviewed()
           }}>approve</div>
           <div onClick={() => {
             reviewPost(reply._id, "reply", false)
-            window.location.reload()
+            getUnreviewed()
           }}>reject</div>
         </div>)}
       </Content>

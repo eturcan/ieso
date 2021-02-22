@@ -16,11 +16,21 @@ let Container = styled.div`
   }
 `
 
+let Error = styled.div`
+  max-width: 30rem;
+  font-weight: 600;
+`
+
 function SignIn({ csrfTokenProp, query }) {
   const router = useRouter()
   return (
     <Container>
       <form method='post' action='/api/auth/callback/credentials'>
+        {
+          query.error === "CredentialsSignin" && <Error>
+            <div>Those credentials did not match an account</div>
+          </Error>
+        }
         <input name='csrfToken' type='hidden' defaultValue={csrfTokenProp}/>
         <input name='register' type='hidden' defaultValue="false"/>
         <TextField

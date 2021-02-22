@@ -11,8 +11,16 @@ export default async function review(req, res) {
     return
   }
   await client.connect()
+  const accountsDb = client.db("accounts")
+  const usersCol = accountsDb.collection("users")
+  let user = await usersCol.findOne({username: session.user.name})
+  if (user.moderator !== true) {
+    res.status(401)
+    res.end()
+    return
+  }
   const postsDb = client.db("posts")
-  const { _id, type, approve, username } = req.body
+  const { _id, type, approve, username, message } = req.body
   if (!_id || !type) {
     res.status(406)
     res.end()
@@ -20,24 +28,24 @@ export default async function review(req, res) {
   }
   if (type === "post") {
     const postsCol = postsDb.collection("posts")
-    const notiCol = postsDb.collection("notifications")
+    const messCol = postsDb.collection("messages")
     if (approve) {
       await postsCol.updateOne({_id: ObjectID(_id)}, {$set: { reviewed: true}})
-      await notiCol.insertOne({username, id: ObjectID(_id), approved: true, type: "post"})
+      await messCol.insertOne({username, id: ObjectID(_id), approved: true, type: "post", message, from: session.user.name})
     }
     else {
       await postsCol.deleteOne({_id: ObjectID(_id)})
-      await notiCol.insertOne({username, id: ObjectID(_id), approved: false, type: "post"})
+      await messCol.insertOne({username, id: ObjectID(_id), approved: false, type: "post", message, from: session.user.name})
     }
   } else if (type === "reply") {
     const repliesCol = postsDb.collection("replies")
     if (approve) {
       await repliesCol.updateOne({_id: ObjectID(_id)}, {$set: { reviewed: true}})
-      await notiCol.insertOne({username, id: ObjectID(_id), approved: true, type: "reply"})
+      await messCol.insertOne({username, id: ObjectID(_id), approved: true, type: "reply", message, from: session.user.name})
     }
     else {
       await repliesCol.deleteOne({_id: ObjectID(_id)})
-      await notiCol.insertOne({username, id: ObjectID(_id), approved: false, type: "reply"})
+      await messCol.insertOne({username, id: ObjectID(_id), approved: false, type: "reply", message, from: session.user.name})
     }
   }
   req.statusCode = 200

@@ -29,8 +29,11 @@
                 "annoyed",
                 "hopeful",
                 "despaired",
-                "guilty"
-            ],
+                "guilty",
+		"afraid",
+		"disgusted",
+		"surprised"
+	    ],
             "properties": {
                 "angry": {
                     "$id": "#/properties/emotions/properties/angry",
@@ -157,6 +160,39 @@
                     "$id": "#/properties/emotions/properties/guilty",
                     "type": "integer",
                     "title": "guilty",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "default": 1,
+                    "examples": [
+                        5
+                    ]
+                },
+		"afraid": {
+                    "$id": "#/properties/emotions/properties/afraid",
+                    "type": "integer",
+                    "title": "afraid",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "default": 1,
+                    "examples": [
+                        5
+                    ]
+                },
+		"disgusted": {
+                    "$id": "#/properties/emotions/properties/disgusted",
+                    "type": "integer",
+                    "title": "disgusted",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "default": 1,
+                    "examples": [
+                        5
+                    ]
+                },
+		"surprised": {
+                    "$id": "#/properties/emotions/properties/surprised",
+                    "type": "integer",
+                    "title": "surprised",
                     "minimum": 1,
                     "maximum": 10,
                     "default": 1,
