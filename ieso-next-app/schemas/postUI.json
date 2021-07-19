@@ -1,52 +1,31 @@
 {
   "emotions": {
     "ui:title": "Emotion Rankings",
-    "angry": {
-      "ui:widget": "range"
-    },
-    "sad": {
-      "ui:widget": "range"
-    },
-    "attentive": {
-      "ui:widget": "range"
-    },
     "stressed": {
-      "ui:widget": "range"
-    },
-    "happy": {
       "ui:widget": "range"
     },
     "lonely": {
       "ui:widget": "range"
     },
-    "calm": {
-      "ui:widget": "range"
-    },
-    "excited": {
-      "ui:widget": "range"
-    },
-    "anxious": {
-      "ui:widget": "range"
-    },
-    "annoyed": {
-      "ui:widget": "range"
-    },
-    "hopeful": {
-      "ui:widget": "range"
-    },
-    "despaired": {
-      "ui:widget": "range"
-    },
     "guilty": {
+      "ui:widget": "range"
+    },
+    "sad": {
+      "ui:widget": "range"
+    },
+    "angry": {
       "ui:widget": "range"
     },
     "afraid": {
       "ui:widget": "range"
     },
+    "surprised": {
+      "ui:widget": "range"
+    },
     "disgusted": {
       "ui:widget": "range"
     },
-    "surprised": {
+    "happy": {
       "ui:widget": "range"
     }
   },
@@ -67,9 +46,6 @@
   },
   "topic": {
     "ui:widget": "checkboxes"
-  },
-  "topic_other": {
-    "ui:widget": "textarea"
   },
   "ui:order": [
     "emotions_description",
